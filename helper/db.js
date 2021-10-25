@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb+srv://azizbek:family1225vsburxon@adminpanel.htwy9.mongodb.net/adminPanel'
-//drMZyjyCLwEwykIU  mongorestore --uri mongodb+srv://baxromxoja15:<PASSWORD>@cluster0.vvq6b.mongodb.net 
+const URI = "mongodb+srv://baxromxoja15:ecqoMEmBkt7WUMzk@cluster0.vvq6b.mongodb.net/adminPanel"
+
 
 module.exports = async () => {
     try {
