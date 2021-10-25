@@ -1,0 +1,37 @@
+<div class="body_backround">
+  
+{{#if categories.length}}
+<div class="kategories">
+  <div class="container">
+    <div class="row justify-content-center">
+      {{#each categories}}
+      <div class="card_box col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+        <div class="card bg-light d-flex flex-fill">
+          <div class="card-header text-muted border-bottom-0">
+
+          </div>
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="col-6">
+                <h2 class="lead"><b>{{categoryName}}</b></h2>
+                <p class="text-muted text-sm"><b>About: </b> Web Developers / Frontend and Backend </p>
+                <ul class="ml-4 mb-0 fa-ul text-muted">
+                  <li class="small"><span class="price">Price:</span> <span class="sortNumber">{{sortNumber}}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-6 text-center">
+                <img src="/images/{{categoryIcon}}" alt="{{categoryIcon}}" class="img-circle img-fluid">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+{{else}}
+<h1>Kategoriyalar yo'q</h1>
+{{/if}}
+</div>
