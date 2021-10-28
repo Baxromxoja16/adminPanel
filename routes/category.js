@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const fileUpload = require('../middleware/fileUpload')
+const toDelete = require('../middleware/toDelete')
 const Category = require('../models/Category')
 const product = require('../models/Product')
 
@@ -44,16 +45,17 @@ router.get("/edit/:id", async (req, res) => {
     });
 });
 
-router.post("/edit/:id", async (req, res) => {
-    console.log(req.body);
-    const { categoryName, sortNumber } = req.body
-    // const asd = req.body
+router.post("/edit/:id", fileUpload.single('categoryIcon'), async (req, res) => {
+    const { categoryIcon } = await Category.findById(req.params.id)
+    const category = req.body
+
+    if (req.file) {
+        toDelete(categoryIcon)
+        category.categoryIcon = req.file.filename
+    }
 
 
-    await Category.findByIdAndUpdate(req.params.id, {
-        categoryName,
-        sortNumber
-    }, (err) => {
+    await Category.findByIdAndUpdate(req.params.id, category, (err) => {
         if (err) {
             console.log(err);
         } else {
@@ -65,10 +67,18 @@ router.post("/edit/:id", async (req, res) => {
 })
 
 router.get('/delete/:id', async (req, res) => {
-    await Category.findByIdAndDelete(req.params.id)
-    res.redirect('/admin/category/read', {
-        layout: 'main'
+    const { categoryIcon } = await Category.findById(req.params.id)
+    await Category.findByIdAndDelete(req.params.id, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            toDelete(categoryIcon)
+            res.redirect('/admin/category/read')
+        }
     })
+
+
+
 })
 
 module.exports = router

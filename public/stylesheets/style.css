@@ -6,22 +6,36 @@ body {
 a {
   color: #00b7ff;
 }
-.navbar{
+
+.navbar {
   margin-left: 0 !important;
 }
-.nav_item{
-  display: flex ;
+
+.nav_item {
+  display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
 }
-.title_span img{
+
+.title_span img {
   width: 80px;
-  
+
 }
 
-.body_backround{
+.lead {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center
+}
+
+.body_backround {
   background: #474d53;
   margin-top: 20px;
 }
 
+.card_body_item {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
