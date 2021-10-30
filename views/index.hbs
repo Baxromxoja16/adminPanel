@@ -1,32 +1,20 @@
-<div class="body_backround">
-      <a href="/admin">Admin</a>
-  
 {{#if categories.length}}
-<div class="kategories">
+<div class="kategories1" style="margin-top: 100px;">
   <div class="container">
     <div class="row justify-content-center">
       {{#each categories}}
-      <div class="card_box col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
-        <div class="card">
-          <div class="card-header text-muted border-bottom-0">
-          </div>
-          <div class="card-body pt-0">
-            <div class="row flex-column align-content-center"> 
-              <div class="col-6 text-center">
-                <img src="/images/{{categoryIcon}}" alt="{{categoryIcon}}" class="img-circle img-fluid">
-              </div>
-              <div class="col-6">
-                <div class="card_body_item">
-                  <h2 class="lead"><b>{{categoryName}}</b></h2>
-                <ul class="ml-4 mb-0 fa-ul text-muted">
-                  <li class="small"><span class="price">Price:</span> <span class="price sortNumber">{{sortNumber}}</span>
-                  </li>
-                </div>
-                </ul>
-              </div>
+      <div class="col-2" style="display: flex;justify-content: center;align-items: center;">
+        <a href="#!">
+          <div class="card hover" style="padding: 10px;">
+            <div class="img">
+              <img src="/images/{{categoryIcon}}" alt="" class="img123" width="150" height="150"
+                style="border-radius: 50%;" />
+            </div>
+            <div class="about">
+              <h2 class="categoryName" style="text-align: center;margin-top: 10px;">{{categoryName}}</h2>
             </div>
           </div>
-        </div>
+        </a>
       </div>
       {{/each}}
     </div>
@@ -35,4 +23,3 @@
 {{else}}
 <h1>Kategoriyalar yo'q</h1>
 {{/if}}
-</div>
