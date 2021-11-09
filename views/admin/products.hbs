@@ -2,13 +2,14 @@
 <div class="row">
     {{#each products}}
     <div class="col-lg-3">
-        <div class="card">
-            <img src="/images/{{img}}" alt="{{img}}">
+        <div class="card1">
+            <img  src="/images/{{img}}" alt="{{img}}">
             <div class="card-body">
-                <a href="/admin/product/read/{{id}}" class="card-title">{{name}}</a>
-                <p>{{price}}</p>
+                <h1 class="card-title">Mahsulot nomi: <i>{{name}}</i></h1>
+                <br>
+                <p>Mahsulot narxi:  <i>{{price}}</i></p>
                 <div class="d-flex">
-                    <a href="/admin/product/delete/{{id}}" class="btn btn-danger">O'chirish</a>
+                    <a href="/admin/product/delete/{{id}}" class="btn btn_del btn-danger">O'chirish</a>
                     <a href="/admin/product/edit/{{id}}" class="btn btn-warning">O'zgartirish</a>
                 </div>
             </div>

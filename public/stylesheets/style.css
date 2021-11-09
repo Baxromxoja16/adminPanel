@@ -7,35 +7,22 @@ a {
   color: #00b7ff;
 }
 
-.navbar {
-  margin-left: 0 !important;
+.card1 {
+  height: 430px;
+  background: #212529;
+  border-radius: 10px
 }
 
-.nav_item {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
+.card1 img {
+  height: 70%;
+  border-radius: 10px;
+  width: 100%
 }
 
-.title_span img {
-  width: 80px;
-
+.card-title {
+  float: none
 }
 
-.lead {
-  margin-bottom: 0;
-  display: flex;
-  align-items: center
-}
-
-.body_backround {
-  background: #474d53;
-  margin-top: 20px;
-}
-
-.card_body_item {
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
+.btn_del {
+  margin-right: 15px;
 }
