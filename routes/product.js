@@ -3,46 +3,46 @@ const router = Router();
 const Category = require("../models/Category");
 const fileUpload = require("../middleware/fileUpload");
 const Product = require("../models/Product");
-const toDelete = require('../middleware/toDelete')
+const auth = require("../middleware/auth");
+const toDelete = require("../middleware/toDelete");
 
-router.get('/view', async (req, res) => {
-  const products = await Product.find()
+router.get("/view", auth, async (req, res) => {
+  const products = await Product.find();
 
-  res.render('admin/products', {
-    header: 'Mahsulotlarni ko`rish',
-    title: 'Mahsulotlar',
-    layout: 'main',
-    products
-  })
-})
+  res.render("admin/products", {
+    header: "Mahsulotlarni ko`rish",
+    title: "Mahsulotlar",
+    layout: "main",
+    products,
+  });
+});
 
-router.get('/add', async (req, res) => {
-  const categories = await Category.find()
-  res.render('admin/productCreate', {
-    header: 'Mahsulot yaratish',
-    layout: 'main',
-    categories
-  })
-})
+router.get("/add", auth, async (req, res) => {
+  const categories = await Category.find();
+  res.render("admin/productCreate", {
+    header: "Mahsulot yaratish",
+    layout: "main",
+    categories,
+  });
+});
 
-router.post('/add', fileUpload.single('img'), async (req, res) => {
-  const { name, price, categoryId } = req.body
+router.post("/add", auth, fileUpload.single("img"), async (req, res) => {
+  const { name, price, categoryId } = req.body;
   console.log(req.file);
-  const img = req.file.filename
+  const img = req.file.filename;
 
   const product = new Product({
     name,
     price,
     img,
-    categoryId
-  })
+    categoryId,
+  });
 
-  await product.save()
-  res.redirect('/admin/product/view')
-})
+  await product.save();
+  res.redirect("/admin/product/view");
+});
 
-
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", auth, async (req, res) => {
   const categories = await Category.find();
   const product = await Product.findById(req.params.id);
   console.log(product);
@@ -55,41 +55,35 @@ router.get("/edit/:id", async (req, res) => {
   });
 });
 
-router.post('/edit/:id', fileUpload.single("img"), async (req, res) => {
-  const { img } = await Product.findById(req.params.id)
-  const product = req.body
-
-
+router.post("/edit/:id", auth, fileUpload.single("img"), async (req, res) => {
+  const { img } = await Product.findById(req.params.id);
+  const product = req.body;
 
   if (req.file) {
-    toDelete(img)
-    product.img = req.file.filename
+    toDelete(img);
+    product.img = req.file.filename;
   }
 
   await Product.findByIdAndUpdate(req.params.id, product, (err) => {
     if (err) {
       console.log(err);
     } else {
-      toDelete(img)
-      res.redirect('/admin/product/view')
+      res.redirect("/admin/product/view");
     }
-  })
+  });
+});
 
-})
-
-router.get('/delete/:id', async (req, res) => {
-  const { img } = await Product.findById(req.params.id)
+router.get("/delete/:id", auth, async (req, res) => {
+  const { img } = await Product.findById(req.params.id);
 
   await Product.findByIdAndDelete(req.params.id, (err) => {
     if (err) {
       console.log(err);
     } else {
-      toDelete(img)
-      res.redirect('/admin/product/view')
+      toDelete(img);
+      res.redirect("/admin/product/view");
     }
-  })
-})
-
-
+  });
+});
 
 module.exports = router;

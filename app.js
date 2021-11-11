@@ -4,11 +4,16 @@ const exhbs = require('express-handlebars')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session)
 
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
 const categoryRouter = require('./routes/category');
 const productRouter = require('./routes/product');
+const authRouter = require('./routes/auth');
+
+const variables = require('./middleware/virables')
 
 const app = express();
 
@@ -29,6 +34,11 @@ app.engine('hbs', exhbs({
   }
 }))
 
+const store = new MongoStore({
+  uri: 'mongodb+srv://baxromxoja15:ecqoMEmBkt7WUMzk@cluster0.vvq6b.mongodb.net/adminPanel',
+  collection: 'session'
+})
+
 require('./helper/db')()
 
 app.use(logger('dev'));
@@ -37,13 +47,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  resave: false,
+  secret: 'some_secret_key',
+  saveUninitialized: false,
+  store
+}))
+
 app.use('/admin', express.static(path.join(__dirname, 'public')))
 app.use('/admin:any', express.static(path.join(__dirname, 'public')))
+
+app.use(variables)
 
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/category', categoryRouter);
 app.use('/admin/product', productRouter);
+app.use('/auth', authRouter);
 
 
 
@@ -64,3 +84,5 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
+
+//mongodb+srv://baxromxoja15:ecqoMEmBkt7WUMzk@cluster0.vvq6b.mongodb.net/adminPanel

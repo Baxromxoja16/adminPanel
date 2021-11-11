@@ -10,19 +10,25 @@ a {
 .card1 {
   height: 430px;
   background: #212529;
-  border-radius: 10px
+  border-radius: 10px;
 }
 
 .card1 img {
   height: 70%;
   border-radius: 10px;
-  width: 100%
+  width: 100%;
 }
 
 .card-title {
-  float: none
+  float: none;
 }
 
 .btn_del {
   margin-right: 15px;
 }
+/* .body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+} */
